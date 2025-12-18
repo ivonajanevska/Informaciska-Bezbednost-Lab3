@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <title>Грешка при најава/регистрација</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f2f2f2; padding-top: 100px; }
+        .container { background-color: white; padding: 40px; border-radius: 10px; display: inline-block; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+        h2 { color: #cc0000; }
+        button { margin: 10px; padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; }
+        button.login { background-color: #4CAF50; color: white; }
+        button.signup { background-color: #008CBA; color: white; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Настана грешка!</h2>
+    <p>Неуспешна регистрација или најава.</p>
+    <div>
+        <button class="signup" onclick="window.location.href='/site/register'">Регистрација</button>
+        <button class="login" onclick="window.location.href='/site/login'">Логин</button>
+    </div>
+</div>
+</body>
+</html>

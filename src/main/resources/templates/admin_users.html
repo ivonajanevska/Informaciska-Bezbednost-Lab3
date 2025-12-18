@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Users Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    select, input[type=number], button {
+      padding: 4px 8px;
+      margin: 0 2px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Users List (Admin Only)</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Current Role</th>
+    <th>Assign Temporary Role</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.username}"></td>
+    <td th:text="${@userService.getCurrentOrgRole(user)}"></td>
+    <td>
+      <form th:action="@{/site/admin/changeOrgRole}" method="post">
+        <input type="hidden" name="username" th:value="${user.username}" />
+        <select name="newRole">
+          <option value="ADMIN">ADMIN</option>
+          <option value="EMPLOYEE">EMPLOYEE</option>
+          <option value="INTERN">INTERN</option>
+        </select>
+        <input type="number" name="durationSeconds" value="60" min="1" />
+        <button type="submit">Assign</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

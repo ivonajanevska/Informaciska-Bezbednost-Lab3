@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Request Resource Access</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        table { width: 70%; border-collapse: collapse; margin-bottom: 20px; }
+        table, th, td { border: 1px solid #aaa; }
+        th, td { padding: 10px; text-align: left; }
+        button { padding: 5px 10px; background-color: #007bff; border: none; color: white; cursor: pointer; border-radius: 4px; }
+        button:hover { background-color: #0056b3; }
+        .message { margin-bottom: 15px; }
+        .message.success { color: green; }
+        .message.error { color: red; }
+    </style>
+</head>
+<body>
+
+<h1>Welcome, <span th:text="${currentUser.username}">User</span></h1>
+<h2>Request Access to Resources (JIT)</h2>
+
+<div th:if="${successMessage}" class="message success">
+    <p th:text="${successMessage}"></p>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Resource</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="resRole : ${availableResourceRoles}">
+        <td th:text="${resRole}">DB_READER</td>
+        <td>
+            <form th:action="@{/site/requestResource}" method="post">
+                <input type="hidden" name="role" th:value="${resRole}" />
+                <button type="submit">Request Access</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Your Active Resource Access</h3>
+<ul>
+    <li th:each="r : ${userResourceRoles}" th:text="${r}"></li>
+</ul>
+
+</body>
+</html>
